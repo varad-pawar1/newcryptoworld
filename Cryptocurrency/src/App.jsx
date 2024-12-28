@@ -58,11 +58,7 @@ const App = () => {
     const end = start + itemsPerPage; // End index for current page
     const currentData = filteredData.slice(start, end); // Slicing data for current page
 
-    if (cryptoOrderRef.current[currentPage]) {
-      setCryptonite(cryptoOrderRef.current[currentPage]); // Setting ordered crypto data if available
-    } else {
-      setCryptonite(currentData); // Setting sliced crypto data
-    }
+    setCryptonite(cryptoOrderRef.current[currentPage] || currentData); // Setting sliced or ordered crypto data
   }, [filteredData, currentPage, itemsPerPage]);
 
   // Handle search input
@@ -96,13 +92,16 @@ const App = () => {
   const handleDragEnd = (event) => {
     const { active, over } = event;
     if (active.id === over.id) return; // If dragged item and target are the same, do nothing
-
+  
     setCryptonite((cryptonite) => {
       const startIndex = cryptonite.findIndex((item) => item.id === active.id); // Index of item being dragged
       const endIndex = cryptonite.findIndex((item) => item.id === over.id); // Index of target item
-      return arrayMove(cryptonite, startIndex, endIndex); // Reordering data
+      cryptoOrderRef.current[currentPage] = arrayMove(cryptonite, startIndex, endIndex); // Reordering data and storing in ref
+      return cryptoOrderRef.current[currentPage];
     });
   };
+  
+  
 
   return (
     <div className="container">
@@ -127,7 +126,6 @@ const App = () => {
           </DndContext>
           <Pagination
             paginate={(page) => {
-              cryptoOrderRef.current[currentPage] = [...cryptonite]; // Storing the order of cryptocurrencies for pagination
               setCurrentPage(page); // Updating current page
             }}
             dataLength={filteredData.length} // Total filtered data length
