@@ -1,0 +1,71 @@
+.mainPaginationBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paginationBox {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 18px;
+}
+
+.paginationBox>button {
+  background-color: #ff1100;
+  padding: 10px 15px;
+  border-radius: 50%;
+  min-width: 45px;
+  color: black;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease-in;
+}
+
+.paginationBox>button:hover {
+  background-color: black;
+  color: #ff1100;
+  transform: scale(1.2);
+  border: 2px solid whitesmoke;
+}
+
+.paginationBox>.activePageButton {
+  background-color: #00c853;
+  color: white;
+  font-weight: bold;
+  border: 2px solid #004d40;
+  transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (min-width: 540px) and (max-width: 780px) {
+  .paginationBox {
+    margin: 30px;
+    display: grid;
+    width: 80%;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .paginationBox>button {
+    height: 43px;
+    width: 43px;
+  }
+}
+
+@media (min-width: 100px) and (max-width: 540px) {
+  .paginationBox {
+    margin: 30px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 80%;
+  }
+
+  .paginationBox>button {
+    height: 38px;
+    width: 38px;
+  }
+}

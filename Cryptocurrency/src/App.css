@@ -1,0 +1,26 @@
+div.container {
+  max-width: 1280px;
+  min-width: 430px;
+  margin: auto;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.loading {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.recaptcha-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  height: calc(100vh - 134.800px);
+}
