@@ -67,6 +67,9 @@ Cryptocurrency/
 │ │ ├── Search/
 │ │ │ ├── Search.jsx
 │ │ │ ├── Search.module.css
+│ │ ├── Footer/
+│ │ │ ├── Footer.jsx
+│ │ │ ├── Footer.css
 │ ├── App.css # Global app styles
 │ ├── App.jsx # Main app component
 │ ├── index.css # Global styles (for resetting defaults, etc.)
