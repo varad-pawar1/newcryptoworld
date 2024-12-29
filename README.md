@@ -134,6 +134,6 @@ Below is a snapshot of the application showcasing its UI and features:
 ![landing-page](https://github.com/user-attachments/assets/b9fa6397-63b2-4ea5-ac4d-d974803c171a)
 
 ![main-page](https://github.com/user-attachments/assets/d6e6e244-4906-4e09-878b-d641d639830f)
+![dropdown-feature](https://github.com/user-attachments/assets/673b88ff-caac-487d-8f00-539cf8186fe1)
 
-(Replace `path_to_your_image` with the actual path or URL of the snapshot image.)
 
