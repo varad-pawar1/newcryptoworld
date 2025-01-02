@@ -1,31 +1,45 @@
-import React, { useState } from "react"; // Importing React and useState hook
-import styles from "./Search.module.css"; // Importing CSS module for styling
+import React, { useState } from "react";
+import styles from "./Search.module.css";
 
-const Search = ({ searchValuefn }) => {
-  // State for search input
+const Search = ({ sortByfn, searchValuefn }) => {
   const [search, setSearch] = useState("");
+  const [sortBy, setSortBy] = useState("");
 
-  // Handle input change event
+  // Handle input change
   const handleInputChange = (e) => {
-    const value = e.target.value; // Get the current input value
-    setSearch(value); // Update the search state
-    searchValuefn(value); // Pass the search value to the parent component's search function
+    const value = e.target.value;
+    setSearch(value);
+    searchValuefn(value);
+  };
+
+  // Handle sort change
+  const handleSortChange = (e) => {
+    const value = e.target.value;
+    setSortBy(value);
+    sortByfn(value);
   };
 
   return (
-    <div className={styles.searchStyle}> {/* Container with custom styling */}
+    <div className={styles.searchStyle}>
       <form>
         <input
-          type="search" // Input type for search functionality
-          name="search" // Name attribute for form submission (optional)
-          className={styles.searchedValue} // Input field styling from CSS module
-          placeholder="Search cryptocurrencies..." // Placeholder text
-          value={search} // Controlled input value
-          onChange={handleInputChange} // Handling input change
+          type="search"
+          name="search"
+          className={styles.searchedValue}
+          placeholder="Search cryptocurrencies..."
+          value={search}
+          onChange={handleInputChange}
         />
+        <select value={sortBy} onChange={handleSortChange}>
+          <option value="">Sort by</option>
+          <option value="id">ID</option>
+          <option value="symbol">Symbol</option>
+          <option value="name">Name</option>
+          <option value="current_price">Current Price</option>
+        </select>
       </form>
     </div>
   );
 };
 
-export default Search; // Exporting Search component
+export default Search;

@@ -1,58 +1,108 @@
-.searchStyle > form > div {
+/* General styles */
+.searchStyle {
   display: flex;
   justify-content: center;
-  gap: 1rem;
   padding: 10px;
 }
 
+.searchStyle form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Search input styles */
 .searchedValue {
-  padding: 7px;
-  font-size: 17px;
+  width: 100%;
+  max-width: 400px;
+  background-color: #e0f7fa;
+  padding: 10px;
+  font-size: 16px;
   border-radius: 6px;
+  border: 1px solid #b2ebf2;
   padding-left: 45px;
+  outline: none;
 }
 
-.searchStyle > form > div > button {
-  padding: 2px 5px;
-  font-weight: 700;
+.searchedValue:focus {
+  border-color: #00796b;
+  box-shadow: 0 0 5px rgba(0, 121, 107, 0.5);
+}
+
+/* Dropdown styles */
+select {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #b2ebf2;
+  background-color: #ffffff;
+  outline: none;
+}
+
+select:focus {
+  border-color: #00796b;
+  box-shadow: 0 0 5px rgba(0, 121, 107, 0.5);
+}
+
+/* Button styles */
+.searchStyle button {
+  padding: 8px 12px;
+  font-weight: bold;
   font-size: 14px;
-  border-radius: 10px;
-  background-color: rgba(253, 0, 0, 0.904);
+  border-radius: 6px;
+  background-color: #f44336;
+  color: white;
+  border: none;
   cursor: pointer;
-
-  &:hover {
-    background-color: black;
-    color: #ff1100;
-    transform: scale(1.05);
-    transition: all 0.3s ease-in;
-    border: 1px solid whitesmoke;
-  }
+  transition: all 0.3s ease-in-out;
 }
 
+.searchStyle button:hover {
+  background-color: black;
+  color: #f44336;
+  transform: scale(1.05);
+  border: 1px solid white;
+}
+
+/* Icon styles */
 .searchIconStyle {
   position: relative;
 }
 
 .searchIcon {
   position: absolute;
-  font-size: 30px;
-  left: 21px;
-  top: 5px;
+  font-size: 24px;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #00796b;
 }
 
-/* @media (min-width: 300px) and (max-width: 540px)  */
-@media (min-width: 300px) and (max-width: 540px) {
-  .searchStyle > form > div {
-    width: 80%;
-    margin: auto;
+/* Responsive styles */
+@media (max-width: 540px) {
+  .searchStyle form {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 90%;
   }
 
-  .searchStyle > form > div > label {
-    width: 100%;
-    margin: auto;
+  .searchedValue {
+    font-size: 14px;
+    padding: 8px;
   }
-  .searchStyle > form > div > label > input {
-    width: 100%;
-    margin: auto;
+
+  select {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .searchStyle button {
+    padding: 6px 10px;
+    font-size: 12px;
   }
 }

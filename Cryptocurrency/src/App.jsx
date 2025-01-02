@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CryptoData from "./Components/CryptoData/CryptoData"; // Importing CryptoData component
 import Navbar from "./Components/Navbar/Navbar"; // Importing Navbar component
 import Pagination from "./Components/Pagination/Pagination"; // Importing Pagination component
@@ -21,11 +21,10 @@ const App = () => {
   // State variables
   const [crypto, setCrypto] = useState([]); // State for storing cryptocurrency data
   const [currentPage, setCurrentPage] = useState(1); // State for current page number
-  const [itemsPerPage, setItemsPerPage] = useState(10); // State for items per page
+  const [itemsPerPage, setItemsPerPage] = useState(0); // State for items per page
   const [cryptonite, setCryptonite] = useState([]); // State for cryptonite data (sorted crypto)
   const [loading, setLoading] = useState(true); // State for loading indicator
   const [recaptchaVerified, setRecaptchaVerified] = useState(false); // State for reCAPTCHA verification
-  const [searchValue, setSearchValue] = useState(""); // State for search input value
   const [filteredData, setFilteredData] = useState([]); // State for filtered cryptocurrency data
 
   const cryptoOrderRef = useRef({}); // Ref to track the order of cryptocurrencies
@@ -38,11 +37,12 @@ const App = () => {
         const response = await axios.get(
           "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
         );
+        setItemsPerPage(10)
         setCrypto(response.data); // Setting the crypto data
         setFilteredData(response.data); // Setting filtered data initially
         setLoading(false); // Set loading to false after data fetch
       } catch (error) {
-        console.error(error); // Logging error if any
+        console.log(error); // Logging error if any
         setLoading(false); // Set loading to false even if an error occurs
       }
     }
@@ -63,8 +63,6 @@ const App = () => {
 
   // Handle search input
   const searchValuefn = (value) => {
-    setSearchValue(value); // Updating search input value
-
     if (searchDebounceRef.current) {
       clearTimeout(searchDebounceRef.current); // Clearing previous debounce timeout
     }
@@ -76,6 +74,24 @@ const App = () => {
       setFilteredData(value ? filtered : crypto); // Setting filtered data
       setCurrentPage(1); // Resetting page to 1 on search
     }, 300);
+  };
+
+
+  // Handle sorting
+  const sortByfn = (value) => {
+    if (value) {
+      const sortedData = [...filteredData].sort((a, b) => {
+        if (value === "current_price") return b.current_price - a.current_price;
+        if (value === "id" || value === "symbol" || value === "name") {
+          return a[value].localeCompare(b[value]);
+        }
+        return 0;
+      });
+      setFilteredData(sortedData);
+    } else {
+      setFilteredData(crypto);
+    }
+
   };
 
   const handleRecaptcha = (value) => {
@@ -92,7 +108,7 @@ const App = () => {
   const handleDragEnd = (event) => {
     const { active, over } = event;
     if (active.id === over.id) return; // If dragged item and target are the same, do nothing
-  
+
     setCryptonite((cryptonite) => {
       const startIndex = cryptonite.findIndex((item) => item.id === active.id); // Index of item being dragged
       const endIndex = cryptonite.findIndex((item) => item.id === over.id); // Index of target item
@@ -100,8 +116,8 @@ const App = () => {
       return cryptoOrderRef.current[currentPage];
     });
   };
-  
-  
+
+
 
   return (
     <div className="container">
@@ -115,7 +131,7 @@ const App = () => {
       )}
       {recaptchaVerified && (
         <>
-          <Navbar searchValuefn={searchValuefn} /> {/* Navbar component with search function */}
+          <Navbar sortByfn={sortByfn} searchValuefn={searchValuefn} />
           {loading ? <div className="loading">Loading...</div> : null} {/* Loading spinner */}
           <DndContext
             collisionDetection={closestCorners} // Setting collision detection strategy
