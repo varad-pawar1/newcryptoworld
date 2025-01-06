@@ -1,9 +1,9 @@
-import styles from "./Navbar.module.css"; // Importing CSS module for Navbar styling
-import Search from "../Search/Search"; // Importing Search component
+import styles from "./Navbar.module.css";
+import Search from "../Search/Search";
 
 const Navbar = ({ searchValuefn, sortByfn }) => {
   return (
-    <div className={styles.nav}> {/* Navbar container with custom styling */}
+    <div className={styles.nav}>
       {/* Clicking on the title redirects to the homepage */}
       {/* <h1 onClick={() => (window.location.reload())}>Crypto-World</h1> */}
       <h1>Crypto-World</h1>
@@ -14,4 +14,4 @@ const Navbar = ({ searchValuefn, sortByfn }) => {
   );
 };
 
-export default Navbar; // Exporting Navbar component
+export default Navbar; 

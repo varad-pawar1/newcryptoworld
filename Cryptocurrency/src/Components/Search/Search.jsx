@@ -5,14 +5,14 @@ const Search = ({ sortByfn, searchValuefn }) => {
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("");
 
-  // Handle input change
+  
   const handleInputChange = (e) => {
     const value = e.target.value;
     setSearch(value);
     searchValuefn(value);
   };
 
-  // Handle sort change
+  
   const handleSortChange = (e) => {
     const value = e.target.value;
     setSortBy(value);
